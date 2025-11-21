@@ -42,9 +42,15 @@ python train.py
 The training script will:
 - Create a Snake game environment (10x10 grid)
 - Initialize the PPO LSTM agent
-- Train for 500 iterations by default
+- Train with infinite iterations (controlled by early stopping)
+- Use time-based early stopping with 5 minutes patience
+- Stop automatically when no reward improvement for 5 minutes
 - Save model checkpoints every 100 iterations
 - Plot training progress
+
+The training will run indefinitely until:
+1. Early stopping is triggered (no improvement for 5 minutes)
+2. User interrupts with Ctrl+C
 
 ### Testing
 
