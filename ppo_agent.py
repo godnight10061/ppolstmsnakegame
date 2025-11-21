@@ -156,7 +156,11 @@ class PPO_LSTM_Agent(nn.Module):
             values: state values
             entropy: entropy of the policy
         """
-        action_probs, values = self.forward(states)
+        # Reset hidden state for the batch to ensure correct batch size
+        batch_size = states.shape[0]
+        self.reset_hidden_state(batch_size=batch_size)
+        
+        action_probs, values = self.forward(states, reset_hidden=False)
         dist = torch.distributions.Categorical(action_probs)
         log_probs = dist.log_prob(actions)
         entropy = dist.entropy()

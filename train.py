@@ -186,12 +186,12 @@ class PPOTrainer:
         if len(self.memory) < self.batch_size:
             return 0
         
-        # Convert memory to tensors
-        states = torch.FloatTensor([data['state'] for data in self.memory])
-        actions = torch.LongTensor([data['action'] for data in self.memory])
-        old_log_probs = torch.FloatTensor([data['log_prob'] for data in self.memory])
-        advantages = torch.FloatTensor([data['advantage'] for data in self.memory])
-        returns = torch.FloatTensor([data['return'] for data in self.memory])
+        # Convert memory to tensors (convert to numpy first for better performance)
+        states = torch.FloatTensor(np.array([data['state'] for data in self.memory]))
+        actions = torch.LongTensor(np.array([data['action'] for data in self.memory]))
+        old_log_probs = torch.FloatTensor(np.array([data['log_prob'] for data in self.memory]))
+        advantages = torch.FloatTensor(np.array([data['advantage'] for data in self.memory]))
+        returns = torch.FloatTensor(np.array([data['return'] for data in self.memory]))
         
         total_loss = 0
         
