@@ -9,6 +9,7 @@ A reinforcement learning implementation of a Snake game agent using Proximal Pol
 - **LSTM Memory**: Enables the agent to remember past states and actions
 - **CNN Feature Extraction**: Processes visual game state efficiently
 - **Training and Testing Scripts**: Complete pipeline for training and evaluation
+- **Real-Time Visualization**: Watch your trained agent play in real-time with customizable speed
 
 ## Project Structure
 
@@ -17,6 +18,7 @@ A reinforcement learning implementation of a Snake game agent using Proximal Pol
 ├── ppo_agent.py       # PPO LSTM neural network agent
 ├── train.py           # Training script
 ├── test_agent.py      # Testing and evaluation script
+├── visualize.py       # Visualize best trained agent in real-time
 ├── requirements.txt   # Python dependencies
 └── README.md         # This file
 ```
@@ -51,6 +53,37 @@ The training script will:
 The training will run indefinitely until:
 1. Early stopping is triggered (no improvement for 5 minutes)
 2. User interrupts with Ctrl+C
+
+### Visualization
+
+To visualize the best trained agent playing in real-time:
+
+```bash
+# Auto-find and visualize best model (simplest option)
+python visualize.py
+
+# Specify a model file explicitly
+python visualize.py --model ppo_snake_agent_final.pth
+
+# Custom visualization settings
+python visualize.py --grid_size 15 --fps 20 --episodes 10
+
+# Fast playback for quick evaluation
+python visualize.py --fps 30
+
+# Slow playback for detailed analysis
+python visualize.py --fps 5
+```
+
+The visualization script will:
+- Automatically find the best trained model in the current directory
+- Display the agent playing Snake in real-time
+- Show statistics after each episode (score, reward, steps)
+- Print summary statistics at the end
+
+Controls:
+- **ESC**: Exit visualization
+- **Close Window**: Exit visualization
 
 ### Testing
 
